@@ -7,6 +7,7 @@
 #include <initializer_list>
 #include <typeinfo>
 #include <functional>
+#include <iostream>
 using std::function;
 
 namespace sorts {
@@ -177,6 +178,9 @@ public:
 
     template<typename U> //cout print
     friend std::ostream& operator << (std::ostream &out, const MyArray<U> &arr);
+
+    template<typename U> //cin
+    friend std::istream& operator >> (std::istream &in, MyArray<U> &arr);
 
     T &operator[](int index) {
         if (index >= _length || index < 0 && -index > _length)throw ArrayIndexException();
@@ -548,7 +552,13 @@ std::ostream& operator << (std::ostream &out, const MyArray<U> &arr){
     return out << "]";
 }
 
-
+template<typename U> //cin
+std::istream& operator >> (std::istream &in, MyArray<U> &arr){
+    for (int i = 0; i < arr._length; ++i) {
+        in>>arr[i];
+    }
+    return in;
+}
 
 #endif //MY_IDEAS_MYARRAY_H
 
