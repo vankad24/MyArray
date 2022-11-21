@@ -8,6 +8,7 @@
 #include <typeinfo>
 #include <functional>
 #include <iostream>
+#include <vector>
 using std::function;
 
 namespace sorts {
@@ -466,7 +467,7 @@ public:
         return *this;
     }
 
-    MyArray &sort(){
+    MyArray &sort(bool descending = false){
         sorts::heapSort(_data, _length);
         return *this;
     }
