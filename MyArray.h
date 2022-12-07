@@ -469,6 +469,7 @@ public:
 
     MyArray &sort(bool descending = false){
         sorts::heapSort(_data, _length);
+		if (descending)reverse();
         return *this;
     }
 
