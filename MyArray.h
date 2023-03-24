@@ -132,8 +132,8 @@ private:
         _data = new T[_length];
 
         std::type_info const &t = typeid(T);
-        if (t == typeid(int) || t == typeid(long) || t == typeid(long long) ||
-        t == typeid(short) || t == typeid(char) || t==typeid(double)|| t == typeid(float))fill(0);
+//        if (t == typeid(int) || t == typeid(long) || t == typeid(long long) ||
+//        t == typeid(short) || t == typeid(char) || t==typeid(double)|| t == typeid(float))fill(0);
     }
 
     MyArray(int length, T *array): _length(length){
@@ -164,7 +164,7 @@ public:
     }
 
     //copy constructor
-    MyArray(const MyArray<T> &arr): MyArray(arr._data, arr._length){std::cout<<"copy!\n";}
+    MyArray(const MyArray<T> &arr): MyArray(arr._data, arr._length){/*std::cout<<"copy!\n";*/}
 
     MyArray(int length, const T &value): _length(length){
         _data = new T[length];
@@ -207,6 +207,22 @@ public:
     MyArray &operator /=(const T &value){
         for (int i = 0; i < _length; ++i) _data[i]/=value;
         return *this;
+    }
+
+    MyArray operator +(const T &value){
+        return MyArray(*this)+=value;
+    }
+
+    MyArray operator -(const T &value){
+        return MyArray(*this)-=value;
+    }
+
+    MyArray operator *(const T &value){
+        return MyArray(*this)*=value;
+    }
+
+    MyArray operator /(const T &value){
+        return MyArray(*this)/=value;
     }
 
     MyArray &operator =(const T &value){
@@ -478,6 +494,10 @@ public:
         for (int i = 1; i < _length; ++i)
             sum+=_data[i];
         return sum;
+    }
+
+    T mean(){
+        return sum()/length();
     }
 
     //iterator
